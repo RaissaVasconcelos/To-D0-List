@@ -16,7 +16,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post()
-  async create(@Body() task: string): Promise<string> {
+  async create(@Body() task: string) {
     return this.appService.create(task);
   }
 
