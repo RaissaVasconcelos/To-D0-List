@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  # Serviço que irá rodar o node
+  todo_back:
+    build: ./server
+    container_name: todo_backend
+    restart: always
+    working_dir: /app-backend
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongodb
+    ports:
+      - 3001:3001
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/todo
+
+  mongodb:
+    image: mongo:5.0.7
+    container_name: mongo_todo
+    volumes:
+      - ./:/app
+    restart: always
+    ports:
+      - 27017:27017
