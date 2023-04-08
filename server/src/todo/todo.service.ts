@@ -16,12 +16,15 @@ export class AppService {
     return this.taskModel.find();
   }
 
-  async getById(id: string): Promise<Task> {
-    console.log('Vamo');
+  async getById(id: string): Promise<Task | string> {
+    const task = await this.taskModel.findById(id);
+    if (!task) {
+      return 'Não encontrado';
+    }
     return this.taskModel.findById(id);
   }
 
-  async update(id: string, task: Task): Promise<Task> {
+  async update(id: string, task: Task): Promise<Task | string> {
     await this.taskModel.findByIdAndUpdate(id, task);
     return this.getById(id);
   }
