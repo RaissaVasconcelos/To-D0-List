@@ -6,6 +6,7 @@ import {
   Patch,
   Post,
   Delete,
+  HttpCode,
 } from '@nestjs/common';
 
 import { AppService } from './todo.service';
@@ -36,6 +37,7 @@ export class AppController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   async remove(@Param('id') id: string) {
     return this.appService.remove(id);
   }
