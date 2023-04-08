@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Task {
-  @Prop()
+  @Prop({ required: true })
   task: string;
 }
 

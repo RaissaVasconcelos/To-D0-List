@@ -16,9 +16,8 @@ export class AppService {
     return this.taskModel.find();
   }
 
-  getById(id: string): string {
-    console.log(id);
-    return 'ok';
+  async getById(id: string): Promise<Task> {
+    return this.taskModel.findById(id);
   }
 
   update(id: string, task: string): string {
