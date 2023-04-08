@@ -7,10 +7,9 @@ import { Task, TaskSchema } from './schema/task.schema';
 // mongodb://localhost:27017/CarShop
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGO_URI),
     MongooseModule.forFeature([{ name: Task.name, schema: TaskSchema }]),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class TodoModule {}
