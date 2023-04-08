@@ -12,8 +12,8 @@ export class AppService {
     return newTask.save();
   }
 
-  getAll(): string[] {
-    return ['todos', 'as', 'tasks'];
+  async getAll(): Promise<Task[]> {
+    return this.taskModel.find();
   }
 
   getById(id: string): string {
