@@ -26,8 +26,8 @@ export class AppService {
     return this.getById(id);
   }
 
-  remove(id: string) {
-    console.log(id);
-    return 'remove';
+  async remove(id: string) {
+    await this.taskModel.findByIdAndRemove(id);
+    return 'Remove';
   }
 }
