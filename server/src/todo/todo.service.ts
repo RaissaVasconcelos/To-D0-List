@@ -18,10 +18,7 @@ export class AppService {
 
   async getById(id: string): Promise<Task | string> {
     const task = await this.taskModel.findById(id);
-    if (!task) {
-      return 'Não encontrado';
-    }
-    return this.taskModel.findById(id);
+    return task;
   }
 
   async update(id: string, task: Task): Promise<Task | string> {

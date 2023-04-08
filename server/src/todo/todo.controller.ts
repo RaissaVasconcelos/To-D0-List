@@ -7,6 +7,8 @@ import {
   Post,
   Delete,
   HttpCode,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 
 import { AppService } from './todo.service';
@@ -28,17 +30,38 @@ export class AppController {
 
   @Get(':id')
   async getById(@Param('id') id: string) {
-    return this.appService.getById(id);
+    try {
+      return await this.appService.getById(id);
+    } catch (error) {
+      throw new HttpException(
+        `Task with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() task: Task) {
-    return this.appService.update(id, task);
+    try {
+      return await this.appService.update(id, task);
+    } catch (error) {
+      throw new HttpException(
+        `Task with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 
   @Delete(':id')
   @HttpCode(204)
   async remove(@Param('id') id: string) {
-    return this.appService.remove(id);
+    try {
+      return await this.appService.remove(id);
+    } catch (error) {
+      throw new HttpException(
+        `Task with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 }
