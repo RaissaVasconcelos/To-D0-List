@@ -9,13 +9,14 @@ import {
 } from '@nestjs/common';
 
 import { AppService } from './todo.service';
+import { Task } from './schema/task.schema';
 
 @Controller('task')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post()
-  async create(@Body() task: string) {
+  async create(@Body() task: Task) {
     return this.appService.create(task);
   }
 
@@ -30,7 +31,7 @@ export class AppController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() task: string) {
+  async update(@Param('id') id: string, @Body() task: Task) {
     return this.appService.update(id, task);
   }
 

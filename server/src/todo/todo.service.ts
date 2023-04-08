@@ -7,7 +7,7 @@ import { Task } from './schema/task.schema';
 export class AppService {
   constructor(@InjectModel(Task.name) private taskModel: Model<Task>) {}
 
-  async create(task: string): Promise<Task> {
+  async create(task: Task): Promise<Task> {
     const newTask = new this.taskModel(task);
     return newTask.save();
   }
@@ -17,13 +17,13 @@ export class AppService {
   }
 
   async getById(id: string): Promise<Task> {
+    console.log('Vamo');
     return this.taskModel.findById(id);
   }
 
-  update(id: string, task: string): string {
-    console.log(id);
-    console.log(task);
-    return 'ok';
+  async update(id: string, task: Task): Promise<Task> {
+    await this.taskModel.findByIdAndUpdate(id, task);
+    return this.getById(id);
   }
 
   remove(id: string) {
