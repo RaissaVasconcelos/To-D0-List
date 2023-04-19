@@ -4,6 +4,8 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Container, Section, Content, SectionTasks, ContentTasksDone, InputText, Form } from './Home.style'
 import { Header, ButtonForm, Task, NoneTask } from '../Componentes'
+import { api } from '../service/api'
+
 
 const TaskSchema = z.object({
   id: z.number(),
@@ -26,13 +28,10 @@ export default function Home() {
 
   const [task, setTask] = useState<ITask[]>([])
 
-  const addTask = (input: string) => {
-    const newTask = {
-      id: Math.floor(Math.random() * 1000 + 1000),
-      task: input,
-      completed: false
-    }
-    setTask([...task, newTask])
+  const addTask = async (input: string) => {
+    await api.post('/task', { task: input })
+    const arrTasks = await api.get('/task')
+    setTask(arrTasks.data)
   }
 
   const completedTask = (id: number) => {
@@ -100,7 +99,7 @@ export default function Home() {
         <div>
           { task.map((task) => (
             <Task
-            key={task.id}
+            key={task._id}
             todo={task}
             onCompleteTask={completedTask}
             onDeleteTask={deleteTask}
