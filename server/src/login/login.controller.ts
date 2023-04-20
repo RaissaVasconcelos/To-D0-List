@@ -13,13 +13,13 @@ export class LoginController {
 
   @Get()
   async registerUser(@Body() user: any) {
-    try {
-      await this.loginService.login(user);
-    } catch (error) {
+    const userLogged = await this.loginService.login(user);
+    if (userLogged.length == 0) {
       throw new HttpException(
         'User or Password incorrects',
         HttpStatus.NOT_FOUND,
       );
     }
+    return userLogged;
   }
 }
