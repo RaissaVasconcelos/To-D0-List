@@ -2,7 +2,6 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Task } from './schema/task.schema';
-import { log } from 'console';
 
 @Injectable()
 export class AppService {
