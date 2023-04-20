@@ -15,53 +15,43 @@ export const Content = styled.div`
   padding: 2rem;
   border: 1px solid black;
   border-radius: 6px;
+  background-color: ${(props) => props.theme['gray-400']}
 `
 
-export const Title = styled.h2 `
+export const Title = styled.h2`
   display: flex;
   justify-content: center;
   font-family: sans-serif;
+  color: ${(props) => props.theme['white']};
 `
 
-export const Form = styled.form `
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 `
 
-export const Input = styled.input `
+export const Input = styled.input`
   cursor: text;
   font-size: 1rem;
   padding: 0.5rem;
-  border: 0;
+  border-radius: 5px;
   border-bottom: 2px solid rgb(200, 200, 200);
   outline: 0;
 `
 
-// .input_single input:focus {
-//   border-bottom: 2px solid cornflowerblue;
-// }
-
-export const Button = styled.button `
+export const Button = styled.button`
   margin-top: 0.5rem;
   padding: 0.5rem;
-  background-color: #0066A2;
-  color: #eee;
+  background-color: ${(props) => props.theme['blue']};
+  color: ${(props) => props.theme['white']};
   font-size: 1rem;
   font-weight: bold;
-  border: 1px solid #eee;
+  border: 1px solid ${(props) => props.theme['gray-300']};
   border-radius: 6px;
-  box-shadow: 5px 5px 5px #eee;
-`
+  box-shadow: 3px 3px 3px ${(props) => props.theme['gray-300']};
 
-// .button:hover {
-//   margin-top: 0.5rem;
-//   padding: 0.5rem;
-//   background-color: #013858;
-//   color: #eee;
-//   font-size: 1rem;
-//   font-weight: bold;
-//   border: 1px solid #eee;
-//   border-radius: 6px;
-//   box-shadow: 5px 5px 5px #eee;
-// }
+  &:hover {
+    background-color: ${(props) => props.theme['blue-dark']};
+  }
+`
