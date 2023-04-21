@@ -1,14 +1,22 @@
 version: '3'
 
 services:
+  # serviço que roda o react no vite
+  web:
+    build: ./web
+    container_name: todo_frontend
+    working_dir: /app-frontend
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
   # Serviço que irá rodar o node
   api:
     build: ./server
     container_name: todo_backend
-    working_dir: /app/server
+    working_dir: /app-backend
     restart: always
-    volumes:
-      - ./server:/app/server
     depends_on:
       - mongodb
     ports:
@@ -17,23 +25,10 @@ services:
     environment:
       - MONGO_URI=mongodb://mongodb:27017/todo
 
-  web:
-    build: ./web
-    container_name: todo_frontend
-    working_dir: /app/web
-    restart: always
-    volumes:
-      - ./web:/app/web
-    ports:
-      - 3000:3000
-    depends_on:
-      - api
-
   mongodb:
     image: mongo:5.0.7
     container_name: todo_mongodb
-    volumes:
-      - ./:/app
+    platform: linux/x86_64
     restart: always
     ports:
       - 27017:27017
