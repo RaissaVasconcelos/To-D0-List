@@ -5,7 +5,8 @@ Aplicação FullStack de uma lista de tarefas
 ## 🗯️ Funcionalidades
 
  O projeto consiste numa lista de tarefas que adiciona, gerencia e deleta atividades 
- que devem ser realizadas pelos usuários.
+ que devem ser realizadas pelos usuários. O template do projeto foi criado a partir 
+ de um desafio da Rockeseat e eu acrescentei um backend com o NestJS. 
  
  ![ToDo](gravação-todo.gif)
 
