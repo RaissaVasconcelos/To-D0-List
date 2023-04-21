@@ -14,6 +14,7 @@ export class LoginController {
   @Get()
   async registerUser(@Body() user: any) {
     const userLogged = await this.loginService.login(user);
+    console.log(userLogged);
     if (userLogged.length == 0) {
       throw new HttpException(
         'User or Password incorrects',

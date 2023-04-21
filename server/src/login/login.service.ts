@@ -8,10 +8,9 @@ export class LoginService {
   constructor(@InjectModel(User.name) private loginModel: Model<User>) {}
 
   async login(user: User): Promise<any | null> {
-    const userLogeed = await this.loginModel.find(
-      { name: user.name },
-      { password: user.password },
-    );
+    const userLogeed = await this.loginModel.find({
+      $and: [{ name: user.name }, { password: user.password }],
+    });
     return userLogeed;
   }
 }
