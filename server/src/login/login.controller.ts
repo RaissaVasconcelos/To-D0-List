@@ -1,6 +1,6 @@
 import {
   Controller,
-  Get,
+  Post,
   Body,
   HttpException,
   HttpStatus,
@@ -11,10 +11,9 @@ import { LoginService } from './login.service';
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
-  @Get()
+  @Post()
   async registerUser(@Body() user: any) {
     const userLogged = await this.loginService.login(user);
-    console.log(userLogged);
     if (userLogged.length == 0) {
       throw new HttpException(
         'User or Password incorrects',
