@@ -1,22 +1,36 @@
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Container, Content, Form, Input, Title } from './Login.style'
+import { api } from '../service/api';
+import { useNavigate } from 'react-router-dom';
 
 const InputSchema = z.object({
-  user: z.string().min(3, { message: 'Required min 3 letters' }),
+  name: z.string().min(3, { message: 'Required min 3 letters' }),
   password: z.string().min(3, { message: 'Required min 3 letters' })
 })
 
 type Inputs = z.infer<typeof InputSchema>
 
 export default function Login() {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
     resolver: zodResolver(InputSchema),
   });
 
-  const handleLogin: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const handleLogin = async (data: Inputs) => {
+    try {
+      const response = await api.post('/login', data)
+      salveUser(response.data.name);
+      navigate('/home');
+      
+    } catch (error: any) {
+      alert(error.response.data.message)
+    }
+  }
+
+  const salveUser = (user: string) => {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   return(
@@ -24,15 +38,15 @@ export default function Login() {
       <Content>
         <Title>Login</Title>
         <Form onSubmit={handleSubmit(handleLogin)}>
-          <label htmlFor='id_user'>
+          <label htmlFor='id_name'>
             <Input 
               type='text'
-              placeholder='user'
-              id='id_user'
+              placeholder='name'
+              id='id_name'
               required
-              {...register('user')}
+              {...register('name')}
             />
-            {errors.user?.message && <p>{errors.user?.message}</p>}
+            {errors.name?.message && <p>{errors.name?.message}</p>}
           </label>
           <label htmlFor='id_password'>
             <Input
