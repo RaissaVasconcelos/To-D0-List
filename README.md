@@ -35,18 +35,14 @@ Para conseguir executar os comandos do abaixo também é necessário que seu sis
 ### 1 - Na raíz do projeto, suba os containers do frontend, backend e o banco de dados (`MongoDB`) com o comando:
 
     docker-compose up -d 
-    
-### 2 - Instale as dependências do frontend (comando: cd web) e backend (comando: cd server) com o comando:
-
-    npm install
 
 O container da Api está mapeando a porta:
 
-- app_api: 3001
+- to-do-list_api: 3001
 
 O container da Web está mapeando a porta:
 
-- app_web: 3000
+- to-do-list_web: 3000
 
 Para parar os containers, na pasta raiz do projeto execute o comando:
 
@@ -57,7 +53,8 @@ Para parar os containers, na pasta raiz do projeto execute o comando:
 
 ## 🙎🏻‍♀️ Usuários para fazer Login
 
-Nessa aplicação é necessário fazer o login com um name e password no endereço http://localhost:3000/.
+Nessa aplicação é necessário fazer o login com name e password no endereço http://localhost:3000/.
+
 A tabela abaixo disponibiliza usuários pré-cadastrados para o acesso:
 
 |   Nome   |   Senha    |
